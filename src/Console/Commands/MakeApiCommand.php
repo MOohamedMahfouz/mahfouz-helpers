@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class MakeApiCommand extends Command
 {
-    protected $signature = 'make:api-controller
+    protected $signature = 'mahfouz:make-api-controller
     {name : Controller name}
     {--methods=* : Methods to generate}
     {--resource=* : Resource fields}
