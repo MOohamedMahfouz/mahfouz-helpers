@@ -1,7 +1,8 @@
 <?php
 
 
-namespace App\Services;
+namespace Mahfouz\Helpers\Services;
+
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\QueryBuilder\QueryBuilder;
