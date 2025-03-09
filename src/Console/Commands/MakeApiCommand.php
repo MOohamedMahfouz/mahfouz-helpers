@@ -172,7 +172,7 @@ class MakeApiCommand extends Command
         $output = '';
         $stubPath = __DIR__ . '/stubs/methods/';
 
-        if ($methods[0] ?? '' === '*') {
+        if (in_array('*', $methods)) {
             $methods = [
                 'index',
                 'store',
