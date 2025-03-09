@@ -43,6 +43,7 @@ class MakeServiceCommand extends Command
             <?php
 
             namespace App\Services;
+            
 
             use {$modelClass};
 
