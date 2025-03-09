@@ -301,7 +301,7 @@ class MakeApiCommand extends Command
                 $table = Str::plural(str_replace('_id', '', $field));
             }
 
-            return ['required', 'integer', "Rule::exists(\"{$table}\", \"id\")"];
+            return ['required', 'integer', "exists:{$table},id"];
         }
 
         if (str_ends_with($field, '_price') || str_ends_with($field, 'Price')) {
