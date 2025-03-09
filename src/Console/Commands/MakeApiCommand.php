@@ -327,6 +327,7 @@ class MakeApiCommand extends Command
         $routes = [];
         $pluralModel = Str::plural(Str::snake($modelName));
         $controllerClass = $modelName . 'Controller';
+        $routeBindingModel = Str::camel_case($modelName);
 
         if (in_array('*', $methods)) {
             $routes[] = "Route::apiResource('{$pluralModel}', {$controllerClass}::class);";
@@ -345,15 +346,15 @@ class MakeApiCommand extends Command
                         $httpMethod = 'post';
                         break;
                     case 'show':
-                        $uri = "{$pluralModel}/{id}";
+                        $uri = "{$pluralModel}/{$routeBindingModel}";
                         $httpMethod = 'get';
                         break;
                     case 'update':
-                        $uri = "{$pluralModel}/{id}";
+                        $uri = "{$pluralModel}/{$routeBindingModel}";
                         $httpMethod = 'put';
                         break;
                     case 'destroy':
-                        $uri = "{$pluralModel}/{id}";
+                        $uri = "{$pluralModel}/{$routeBindingModel}";
                         $httpMethod = 'delete';
                         break;
                 }
