@@ -326,35 +326,35 @@ class MakeApiCommand extends Command
     protected function printRoutes($modelName, $methods, $controllerPath,$variableName)
     {
         $routes = [];
-        $pluralModel = Str::plural(Str::snake($modelName));
+        $kebabModelName = Str::plural(Str::kebab($modelName));
         $controllerClass = $modelName . 'Controller';
 
         if (in_array('*', $methods)) {
-            $routes[] = "Route::apiResource('{$pluralModel}', {$controllerClass}::class);";
+            $routes[] = "Route::apiResource('{$kebabModelName}', {$controllerClass}::class);";
         } else {
             foreach ($methods as $method) {
-                $uri = $pluralModel;
+                $uri = $kebabModelName;
                 $httpMethod = 'get';
 
                 switch ($method) {
                     case 'index':
-                        $uri = $pluralModel;
+                        $uri = $kebabModelName;
                         $httpMethod = 'get';
                         break;
                     case 'store':
-                        $uri = $pluralModel;
+                        $uri = $kebabModelName;
                         $httpMethod = 'post';
                         break;
                     case 'show':
-                        $uri = "{$pluralModel}/{$variableName}";
+                        $uri = "{$kebabModelName}/{$variableName}";
                         $httpMethod = 'get';
                         break;
                     case 'update':
-                        $uri = "{$pluralModel}/{$variableName}";
+                        $uri = "{$kebabModelName}/{$variableName}";
                         $httpMethod = 'put';
                         break;
                     case 'destroy':
-                        $uri = "{$pluralModel}/{$variableName}";
+                        $uri = "{$kebabModelName}/{$variableName}";
                         $httpMethod = 'delete';
                         break;
                 }
