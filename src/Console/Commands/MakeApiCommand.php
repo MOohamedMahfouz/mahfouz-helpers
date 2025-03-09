@@ -316,7 +316,7 @@ class MakeApiCommand extends Command
     {
         $routes = [];
         $pluralModel = Str::plural(Str::snake($modelName));
-        $controllerClass = $pluralModel . 'Controller';
+        $controllerClass = $modelName . 'Controller';
 
         if (in_array('*', $methods)) {
             $routes[] = "Route::apiResource('{$pluralModel}', {$controllerClass}::class);";
