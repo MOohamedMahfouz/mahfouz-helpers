@@ -72,6 +72,12 @@ class MakeApiCommand extends Command
         $this->filesystem->put($path, $content);
 
         $this->info("Controller created successfully: {$name}");
+
+        $this->printRoutes(
+            $modelName,
+            $methods,
+            $this->argument('name')
+        );
     }
 
     protected function getPath($name)
@@ -304,5 +310,59 @@ class MakeApiCommand extends Command
         }
 
         return ['required', 'string'];
+    }
+
+    protected function printRoutes($modelName, $methods, $controllerPath)
+    {
+        $routes = [];
+        $pluralModel = Str::plural(Str::snake($modelName));
+        $controllerClass = Str::replace('/', '\\', $controllerPath) . 'Controller';
+
+        if (in_array('*', $methods)) {
+            $routes[] = "Route::apiResource('{$pluralModel}', {$controllerClass}::class);";
+        } else {
+            foreach ($methods as $method) {
+                $uri = $pluralModel;
+                $httpMethod = 'get';
+
+                switch ($method) {
+                    case 'index':
+                        $uri = $pluralModel;
+                        $httpMethod = 'get';
+                        break;
+                    case 'store':
+                        $uri = $pluralModel;
+                        $httpMethod = 'post';
+                        break;
+                    case 'show':
+                        $uri = "{$pluralModel}/{id}";
+                        $httpMethod = 'get';
+                        break;
+                    case 'update':
+                        $uri = "{$pluralModel}/{id}";
+                        $httpMethod = 'put';
+                        break;
+                    case 'destroy':
+                        $uri = "{$pluralModel}/{id}";
+                        $httpMethod = 'delete';
+                        break;
+                }
+
+                $routes[] = "Route::{$httpMethod}('{$uri}', [{$controllerClass}::class, '{$method}']);";
+            }
+        }
+
+        $this->newLine();
+        $this->info('Add these routes to routes/api.php:');
+        $this->newLine();
+        $this->line('//' . str_repeat('-', 60));
+        $this->line('// ' . ucfirst($modelName) . ' Routes');
+        $this->line('//' . str_repeat('-', 60));
+
+        foreach ($routes as $route) {
+            $this->line($route);
+        }
+
+        $this->newLine();
     }
 }
