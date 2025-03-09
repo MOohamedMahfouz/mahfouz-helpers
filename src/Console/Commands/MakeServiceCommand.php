@@ -31,7 +31,10 @@ class MakeServiceCommand extends Command
         $model = $this->argument('model');
         $serviceName = "{$model}Service";
         $modelClass = "App\\Models\\{$model}";
-        $baseServiceClass = "BaseService";
+        $baseServiceClass = class_exists(\App\Services\BaseService::class)
+        ? 'App\Services\BaseService'
+        : 'Mahfouz\Helpers\Services\BaseService';
+
         $servicePath = app_path("Services/{$serviceName}.php");
 
         if (File::exists($servicePath)) {
