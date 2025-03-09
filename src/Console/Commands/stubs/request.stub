@@ -3,6 +3,7 @@
 namespace {{namespace}};
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class {{type}}{{modelName}}Request extends FormRequest
 {
