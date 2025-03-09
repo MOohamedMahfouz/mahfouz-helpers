@@ -1,5 +1,7 @@
 public function store({{storeRequest}} $request)
 {
+    $validated = $request->validated();
+    
     ${{variableName}} = $this->{{variableName}}Service->store({{modelName}}Data::from($validated));
 
     return response()->json(
