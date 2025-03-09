@@ -41,8 +41,8 @@ class MakeApiCommand extends Command
 
         $modelName = $this->getModelName($name);
         $serviceClass = "{$modelName}Service";
-        $storeRequest = "Store{$modelName}Request";
-        $updateRequest = "Update{$modelName}Request";
+        $storeRequest = "";
+        $updateRequest = "";
         $resource = "{$modelName}Resource";
 
         if ($resourceFields = $this->option('resource')) {
@@ -51,10 +51,12 @@ class MakeApiCommand extends Command
 
         if ($storeFields = $this->option('store-request')) {
             $this->generateRequest('Store', $modelName, explode(',', $storeFields[0] ?? ''));
+            $storeRequest = "Store{$modelName}Request";
         }
 
         if ($updateFields = $this->option('update-request')) {
             $this->generateRequest('Update', $modelName, explode(',', $updateFields[0] ?? ''));
+            $updateRequest = "Update{$modelName}Request";
         }
 
         $content = $this->buildClass(
