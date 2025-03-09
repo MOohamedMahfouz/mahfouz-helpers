@@ -82,7 +82,8 @@ class MakeApiCommand extends Command
         $this->printRoutes(
             $modelName,
             $methods,
-            $this->argument('name')
+            $this->argument('name'),
+            $variableName
         );
     }
 
@@ -322,12 +323,11 @@ class MakeApiCommand extends Command
         return ['required', 'string'];
     }
 
-    protected function printRoutes($modelName, $methods, $controllerPath)
+    protected function printRoutes($modelName, $methods, $controllerPath,$variableName)
     {
         $routes = [];
         $pluralModel = Str::plural(Str::snake($modelName));
         $controllerClass = $modelName . 'Controller';
-        $routeBindingModel = Str::camel($modelName);
 
         if (in_array('*', $methods)) {
             $routes[] = "Route::apiResource('{$pluralModel}', {$controllerClass}::class);";
@@ -346,15 +346,15 @@ class MakeApiCommand extends Command
                         $httpMethod = 'post';
                         break;
                     case 'show':
-                        $uri = "{$pluralModel}/{$routeBindingModel}";
+                        $uri = "{$pluralModel}/{$variableName}";
                         $httpMethod = 'get';
                         break;
                     case 'update':
-                        $uri = "{$pluralModel}/{$routeBindingModel}";
+                        $uri = "{$pluralModel}/{$variableName}";
                         $httpMethod = 'put';
                         break;
                     case 'destroy':
-                        $uri = "{$pluralModel}/{$routeBindingModel}";
+                        $uri = "{$pluralModel}/{$variableName}";
                         $httpMethod = 'delete';
                         break;
                 }

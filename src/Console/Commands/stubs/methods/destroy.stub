@@ -1,6 +1,6 @@
-public function destroy({{modelName}} ${{modelName}})
+public function destroy({{modelName}} ${{variableName}})
 {
-    ${{modelName}}->deleteOrFail();
+    ${{variableName}}->deleteOrFail();
 
     return response()->json(
         $this->successResponse(
