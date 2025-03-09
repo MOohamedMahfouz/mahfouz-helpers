@@ -346,15 +346,15 @@ class MakeApiCommand extends Command
                         $httpMethod = 'post';
                         break;
                     case 'show':
-                        $uri = "{$kebabModelName}/{$variableName}";
+                        $uri = "{$kebabModelName}/{{$variableName}}";
                         $httpMethod = 'get';
                         break;
                     case 'update':
-                        $uri = "{$kebabModelName}/{$variableName}";
+                        $uri = "{$kebabModelName}/{{$variableName}}";
                         $httpMethod = 'put';
                         break;
                     case 'destroy':
-                        $uri = "{$kebabModelName}/{$variableName}";
+                        $uri = "{$kebabModelName}/{{$variableName}}";
                         $httpMethod = 'delete';
                         break;
                 }
