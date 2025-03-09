@@ -33,7 +33,7 @@ class MakeServiceCommand extends Command
         $modelClass = "App\\Models\\{$model}";
         $baseServiceClass = class_exists(\App\Services\BaseService::class)
         ? 'App\Services\BaseService'
-        : 'Mahfouz\Helpers\Services\BaseService';
+        : '\Mahfouz\Helpers\Services\BaseService';
 
         $servicePath = app_path("Services/{$serviceName}.php");
 
