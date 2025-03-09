@@ -44,6 +44,7 @@ class MakeApiCommand extends Command
         $storeRequest = "";
         $updateRequest = "";
         $resource = "{$modelName}Resource";
+        $dataImport = "";
 
         if ($resourceFields = $this->option('resource')) {
             $this->generateResource($modelName, explode(',', $resourceFields[0] ?? ''));
@@ -52,11 +53,13 @@ class MakeApiCommand extends Command
         if ($storeFields = $this->option('store-request')) {
             $this->generateRequest('Store', $modelName, explode(',', $storeFields[0] ?? ''));
             $storeRequest = "Store{$modelName}Request";
+            $dataImport = "App\\Data\\{$modelName}Data";
         }
 
         if ($updateFields = $this->option('update-request')) {
             $this->generateRequest('Update', $modelName, explode(',', $updateFields[0] ?? ''));
             $updateRequest = "Update{$modelName}Request";
+            $dataImport = "App\\Data\\{$modelName}Data";
         }
 
         $content = $this->buildClass(
@@ -67,6 +70,7 @@ class MakeApiCommand extends Command
             $serviceClass,
             $storeRequest,
             $updateRequest,
+            $dataImport,
             $resource,
             $methods
         );
@@ -114,6 +118,7 @@ class MakeApiCommand extends Command
         $serviceClass,
         $storeRequest,
         $updateRequest,
+        $dataImport,
         $resource,
         $methods
     ) {
@@ -130,6 +135,9 @@ class MakeApiCommand extends Command
         }
         if ($updateRequest) {
             $requestImports .= "use {$requestNamespace}\\Update{$modelName}Request;";
+        }
+        if ($dataImport) {
+            $requestImports .= $dataImport;
         }
 
 
