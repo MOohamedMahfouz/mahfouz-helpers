@@ -1,0 +1,19 @@
+<?php
+
+namespace {{namespace}};
+
+use App\Http\Controllers\Controller;
+use App\Http\Resources\{{modelName}}Resource;
+use App\Models\{{modelName}};
+use App\Services\{{serviceClass}};
+use Illuminate\Http\Request;
+{{requestImports}}
+
+class {{class}} extends Controller
+{
+    public function __construct(
+        public {{serviceClass}} ${{variableName}}Service
+    ) {}
+
+    {{methods}}
+}
