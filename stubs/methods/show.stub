@@ -1,0 +1,11 @@
+public function show({{modelName}} ${{variableName}})
+{
+    return response()->json(
+        $this->successResponse(
+            '',
+            [
+                "{{variableName}}" => {{resource}}::make(${{variableName}}),
+            ]
+        )
+    );
+}

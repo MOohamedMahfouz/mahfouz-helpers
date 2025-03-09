@@ -1,0 +1,16 @@
+public function update({{modelName}} ${{variableName}}, {{updateRequest}} $request)
+{
+    $validated = $request->validated();
+
+    ${{variableName}} = $this->{{variableName}}Service->update(data: {{modelName}}Data::from($validated), model: ${{variableName}});
+
+
+    return response()->json(
+        $this->successResponse(
+            '',
+            [
+                "{{variableName}}" => {{resource}}::make(${{variableName}}),
+            ]
+        )
+    );
+}

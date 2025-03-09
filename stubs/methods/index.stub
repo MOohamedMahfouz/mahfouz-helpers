@@ -1,0 +1,16 @@
+public function index()
+{
+    ${{variableName}}s = $this->{{variableName}}Service->paginate();
+
+    $totalPages = request()->page ? ${{variableName}}s->lastPage() : 1;
+
+    return response()->json(
+        $this->successResponse(
+            '',
+            [
+                "{{variableName}}s" => {{resource}}::collection(${{variableName}}s),
+                "totalPages" => $totalPages
+            ]
+        )
+    );
+}

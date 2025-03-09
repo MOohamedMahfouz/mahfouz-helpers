@@ -1,0 +1,11 @@
+public function destroy({{modelName}} ${{modelName}})
+{
+    ${{modelName}}->deleteOrFail();
+
+    return response()->json(
+        $this->successResponse(
+            '',
+            []
+        )
+    );
+}

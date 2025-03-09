@@ -1,0 +1,13 @@
+public function store({{storeRequest}} $request)
+{
+    ${{variableName}} = $this->{{variableName}}Service->store({{modelName}}Data::from($validated));
+
+    return response()->json(
+        $this->successResponse(
+            '',
+            [
+                "{{variableName}}" => {{resource}}::make(${{variableName}}),
+            ]
+        )
+    );
+}
