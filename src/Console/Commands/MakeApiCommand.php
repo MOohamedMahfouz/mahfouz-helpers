@@ -137,7 +137,7 @@ class MakeApiCommand extends Command
             $requestImports .= "use {$requestNamespace}\\Update{$modelName}Request;";
         }
         if ($dataImport) {
-            $requestImports .= $dataImport;
+            $requestImports .= "use {$dataImport};";
         }
 
 
