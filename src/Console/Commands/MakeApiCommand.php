@@ -178,7 +178,7 @@ class MakeApiCommand extends Command
 
         foreach ($methods as $method) {
 
-            $methodStub = file_get_contents("{$stubPath}{$method}.stub");
+            $methodStub = file_get_contents(__DIR__ . "/stubs/methods/{$method}.stub");
 
             $output .= str_replace(
                 [
