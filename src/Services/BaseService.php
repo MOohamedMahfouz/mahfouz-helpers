@@ -11,11 +11,16 @@ abstract class BaseService
 {
     protected string $modelClass;
 
-    public function get()
+    public function get(?callable $callback = null)
     {
-        return QueryBuilder::for($this->modelClass::latest())
-            ->allowedFilters($this->defaultFilters())
-            ->get();
+        $query =  QueryBuilder::for($this->modelClass::latest())
+            ->allowedFilters($this->defaultFilters());
+
+        if ($callback) {
+            $callback($query);
+        }
+
+        return $query->get();
     }
 
     public function paginate(array $with = [], $per_page = null, ?callable $callback = null)
