@@ -70,6 +70,20 @@ php artisan make:service User
 
 This will create a service class that extends the BaseService class and is configured for your model.
 
+### Media Cleanup Command
+
+Clean up unused media files that are not referenced in the media table:
+
+```bash
+php artisan media:cleanup
+```
+
+This command will:
+- Delete media files that exist in the storage but are not referenced in the database
+- Remove empty directories after file cleanup
+
+> Note: This command requires the Spatie Media Library package to be installed and configured in your application.
+
 ## Usage
 
 ### Services
