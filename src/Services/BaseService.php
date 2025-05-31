@@ -5,6 +5,7 @@ namespace Mahfouz\Helpers\Services;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
 abstract class BaseService
@@ -13,7 +14,7 @@ abstract class BaseService
 
     public function get(?callable $callback = null)
     {
-        $query =  QueryBuilder::for($this->modelClass::latest())
+        $query = QueryBuilder::for($this->modelClass::query()->latest())
             ->allowedFilters($this->defaultFilters());
 
         if ($callback) {
@@ -25,7 +26,7 @@ abstract class BaseService
 
     public function paginate(array $with = [], $per_page = null, ?callable $callback = null)
     {
-        $query = QueryBuilder::for($this->modelClass::latest())
+        $query = QueryBuilder::for($this->modelClass::query()->latest())
             ->with($with)
             ->allowedFilters($this->defaultFilters());
 
@@ -33,7 +34,7 @@ abstract class BaseService
             $callback($query);
         }
 
-        return $query->paginate($per_page ?? request()->query('perPage', 15));
+        return $query->paginate($per_page ?? Request::integer('perPage', 15));
     }
     public function store(object $data)
     {
