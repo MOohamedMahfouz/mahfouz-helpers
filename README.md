@@ -18,6 +18,39 @@ The package will automatically register its service provider.
 
 ## Features
 
+### Format Response Trait
+
+Easily format consistent JSON responses in your controllers:
+
+```php
+use Mahfouz\Helpers\Traits\FormatResponse;
+
+class UserController extends Controller
+{
+    use FormatResponse;
+    
+    public function index()
+    {
+        $users = User::all();
+        return $this->successResponse('Users retrieved successfully', $users);
+    }
+    
+    public function show($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            return $this->successResponse('User retrieved successfully', $user);
+        } catch (\Exception $e) {
+            return $this->errorResponse('User not found');
+        }
+    }
+}
+```
+
+Available methods:
+- `successResponse(?string $message = null, mixed $data = null): array`
+- `errorResponse(string $message): array`
+
 ### Base Service Class
 
 The package provides a `BaseService` class that implements common CRUD operations for your models. It integrates with Spatie's Query Builder for advanced filtering and pagination.
