@@ -1,7 +1,8 @@
 {
-    "name": "mahfouz/helpers",
+    "name": "mouhamad-mahfouz/helpers",
     "description": "Laravel API development helpers by Mahfouz",
     "type": "library",
+    "license": "MIT",
     "require": {
         "php": "^8.2",
         "illuminate/support": "^11.0|^12.0",

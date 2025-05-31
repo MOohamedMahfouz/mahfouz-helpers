@@ -11,7 +11,7 @@ This package supports Laravel 11 and 12.
 You can install the package via composer:
 
 ```bash
-composer require mahfouz/helpers
+composer require mouhamad-mahfouz/helpers
 ```
 
 The package will automatically register its service provider.
